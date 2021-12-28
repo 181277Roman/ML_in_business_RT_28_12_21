@@ -47,21 +47,21 @@ def predict():
 	# ensure an image was properly uploaded to our endpoint
 	if flask.request.method == "POST":
 
-		description, company_profile, benefits = "", "", ""
+		headline, written_by, news = "", "", ""
 		request_json = flask.request.get_json()
-		if request_json["description"]:
-			description = request_json['description']
+		if request_json["headline"]:
+			headline = request_json['headline']
 
-		if request_json["company_profile"]:
-			company_profile = request_json['company_profile']
+		if request_json["written_by"]:
+			written_by = request_json['written_by']
 
-		if request_json["benefits"]:
-			benefits = request_json['benefits']
-		logger.info(f'{dt} Data: description={description}, company_profile={company_profile}, benefits={benefits}')
+		if request_json["news"]:
+			news = request_json['news']
+		logger.info(f'{dt} Data: headline={headline}, written_by={written_by}, news={news}')
 		try:
-			preds = model.predict_proba(pd.DataFrame({"description": [description],
-												  "company_profile": [company_profile],
-												  "benefits": [benefits]}))
+			preds = model.predict_proba(pd.DataFrame({"headline": [headline],
+												  "written_by": [written_by],
+												  "news": [news]}))
 		except AttributeError as e:
 			logger.warning(f'{dt} Exception: {str(e)}')
 			data['predictions'] = str(e)
