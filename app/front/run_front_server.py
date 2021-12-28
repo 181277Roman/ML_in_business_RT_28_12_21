@@ -21,10 +21,10 @@ app.config.update(
     SECRET_KEY='you-will-never-guess',
 )
 
-def get_prediction(description, company_profile, benefits):
-    body = {'description': description,
-                            'company_profile': company_profile,
-                            'benefits': benefits}
+def get_prediction(headline, written_by, news):
+    body = {'headline': headline,
+                            'written_by': written_by,
+                            'news': news}
 
     myurl = "http://0.0.0.0:8180/predict"
     req = urllib.request.Request(myurl)
@@ -53,15 +53,15 @@ def predict_form():
     form = ClientDataForm()
     data = dict()
     if request.method == 'POST':
-        data['description'] = request.form.get('description')
-        data['company_profile'] = request.form.get('company_profile')
-        data['benefits'] = request.form.get('benefits')
+        data['headline'] = request.form.get('headline')
+        data['written_by'] = request.form.get('written_by')
+        data['news'] = request.form.get('news')
 
 
         try:
-            response = str(get_prediction(data['description'],
-                                      data['company_profile'],
-                                      data['benefits']))
+            response = str(get_prediction(data['headline'],
+                                      data['written_by'],
+                                      data['news']))
             print(response)
         except ConnectionError:
             response = json.dumps({"error": "ConnectionError"})
