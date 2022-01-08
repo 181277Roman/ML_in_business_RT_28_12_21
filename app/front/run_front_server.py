@@ -10,9 +10,9 @@ import urllib.request
 import json
 
 class ClientDataForm(FlaskForm):
-    description = StringField('Job Description', validators=[DataRequired()])
-    company_profile = StringField('Company Profile', validators=[DataRequired()])
-    benefits = StringField('Benefits', validators=[DataRequired()])
+    headline = StringField('headline', validators=[DataRequired()])
+    written_by = StringField('written_by', validators=[DataRequired()])
+    news = StringField('news', validators=[DataRequired()])
 
 
 app = Flask(__name__)
